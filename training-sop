@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THG Hub — SOP Training Nội Bộ</title>
+<style>
+:root {
+  --primary: #1B4FBB;
+  --primary-dark: #0F2D75;
+  --primary-light: #3B72E0;
+  --accent: #F97316;
+  --success: #16A34A;
+  --warning: #D97706;
+  --danger: #DC2626;
+  --info: #0EA5E9;
+  --sidebar-bg: #0D1F4A;
+  --sidebar-hover: rgba(255,255,255,0.07);
+  --sidebar-active-bg: rgba(59,114,224,0.22);
+  --sidebar-text: #94A3B8;
+  --sidebar-active-text: #FFFFFF;
+  --border: #E2E8F0;
+  --bg: #F1F5F9;
+  --card: #FFFFFF;
+  --text: #1E293B;
+  --muted: #64748B;
+  --sidebar-w: 252px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; font-size: 14px; }
+
+/* ── SIDEBAR ── */
+.sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--sidebar-bg); display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; flex-shrink: 0; }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+.sidebar-logo { padding: 20px 16px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-logo .logo-tag { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 36px; height: 36px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: #fff; letter-spacing: -0.5px; flex-shrink: 0; }
+.logo-text { color: #fff; }
+.logo-text .title { font-weight: 700; font-size: 15px; line-height: 1.2; }
+.logo-text .subtitle { font-size: 10px; color: var(--sidebar-text); margin-top: 1px; letter-spacing: 0.5px; text-transform: uppercase; }
+.sidebar-search { padding: 12px 12px 8px; }
+.sidebar-search input { width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 7px 10px; font-size: 12px; color: #fff; outline: none; }
+.sidebar-search input::placeholder { color: var(--sidebar-text); }
+.sidebar-search input:focus { background: rgba(255,255,255,0.12); border-color: var(--primary-light); }
+.nav-group { padding: 8px 0 4px; }
+.nav-group-label { padding: 6px 16px 4px; font-size: 10px; font-weight: 700; color: rgba(148,163,184,0.6); letter-spacing: 1px; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 8px 16px; cursor: pointer; color: var(--sidebar-text); transition: all 0.15s; border-left: 3px solid transparent; font-size: 13px; line-height: 1.3; }
+.nav-item:hover { background: var(--sidebar-hover); color: #fff; }
+.nav-item.active { background: var(--sidebar-active-bg); color: var(--sidebar-active-text); border-left-color: var(--primary-light); }
+.nav-item .nav-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+.nav-item .nav-badge { margin-left: auto; background: var(--danger); color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 99px; letter-spacing: 0.3px; }
+.nav-item .nav-badge.warn { background: var(--warning); }
+.nav-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 6px 0; }
+
+/* ── MAIN ── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar { height: 56px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 24px; gap: 16px; flex-shrink: 0; }
+.topbar-breadcrumb { font-size: 13px; color: var(--muted); }
+.topbar-breadcrumb span { color: var(--text); font-weight: 600; }
+.topbar-actions { margin-left: auto; display: flex; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--bg); color: var(--text); }
+.content { flex: 1; overflow-y: auto; padding: 24px; }
+.content::-webkit-scrollbar { width: 6px; }
+.content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── PAGE ── */
+.page { display: none; max-width: 1100px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* ── CARDS ── */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
+.card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.card-subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+/* ── SOP HEADER ── */
+.sop-header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 14px; padding: 24px; color: #fff; margin-bottom: 16px; position: relative; overflow: hidden; }
+.sop-header::before { content: ''; position: absolute; right: -20px; top: -20px; width: 160px; height: 160px; background: rgba(255,255,255,0.07); border-radius: 50%; }
+.sop-header.priority { background: linear-gradient(135deg, #92400e 0%, #B45309 60%, #D97706 100%); }
+.sop-code { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; opacity: 0.75; text-transform: uppercase; margin-bottom: 6px; }
+.sop-title-big { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
+.sop-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; opacity: 0.85; }
+.sop-meta-item { display: flex; align-items: center; gap: 5px; }
+.sop-badges { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+.badge-priority { background: rgba(255,255,255,0.25); color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+.badge-dept { background: rgba(255,255,255,0.18); color: #fff; }
+
+/* ── DEPT TAGS ── */
+.dept { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+.dept-sm { background: #DBEAFE; color: #1D4ED8; }
+.dept-sale { background: #EDE9FE; color: #6D28D9; }
+.dept-cskh { background: #D1FAE5; color: #065F46; }
+.dept-van-hanh { background: #FEF3C7; color: #92400E; }
+.dept-ke-toan { background: #FCE7F3; color: #9D174D; }
+.dept-ql { background: #FEE2E2; color: #991B1B; }
+
+/* ── STEPS ── */
+.steps { counter-reset: step; display: flex; flex-direction: column; gap: 0; }
+.step { display: flex; gap: 16px; position: relative; padding-bottom: 20px; }
+.step:last-child { padding-bottom: 0; }
+.step:last-child .step-line { display: none; }
+.step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+.step-num.success { background: var(--success); }
+.step-num.warn { background: var(--warning); }
+.step-num.danger { background: var(--danger); }
+.step-line { width: 2px; background: var(--border); flex: 1; margin-top: 4px; }
+.step-body { flex: 1; padding-top: 5px; }
+.step-action { font-weight: 600; font-size: 14px; margin-bottom: 6px; line-height: 1.4; }
+.step-dept-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.step-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.step-detail ul { margin-left: 16px; margin-top: 4px; }
+.step-detail li { margin-bottom: 4px; }
+.step-note { margin-top: 8px; background: #FFF7ED; border: 1px solid #FED7AA; border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #92400E; }
+.step-note.info { background: #EFF6FF; border-color: #BFDBFE; color: #1D4ED8; }
+.step-note.danger { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
+.step-note.success { background: #F0FDF4; border-color: #BBF7D0; color: #166534; }
+
+/* ── RULES BOX ── */
+.rules-box { background: #F8FAFF; border: 1px solid #C7D7F8; border-radius: 10px; padding: 16px; }
+.rules-box .rule { display: flex; gap: 8px; padding: 7px 0; border-bottom: 1px solid #E8EEFC; font-size: 13px; line-height: 1.5; }
+.rules-box .rule:last-child { border-bottom: none; padding-bottom: 0; }
+.rules-box .rule-icon { flex-shrink: 0; margin-top: 1px; }
+
+/* ── TIMELINE TABLE ── */
+.tl-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tl-table th { background: var(--bg); padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; color: var(--muted); border-bottom: 2px solid var(--border); }
+.tl-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.tl-table tr:last-child td { border-bottom: none; }
+.tl-table tr:hover td { background: #F8FAFC; }
+.tl-status { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+.tl-ok { background: #D1FAE5; color: #065F46; }
+.tl-warn { background: #FEF3C7; color: #92400E; }
+.tl-danger { background: #FEE2E2; color: #991B1B; }
+.tl-info { background: #DBEAFE; color: #1D4ED8; }
+
+/* ── YOUTUBE SLOT ── */
+.yt-slot { background: #0F0F0F; border-radius: 10px; overflow: hidden; position: relative; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.yt-slot-inner { text-align: center; color: rgba(255,255,255,0.7); }
+.yt-play { width: 64px; height: 64px; background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+.yt-play svg { margin-left: 5px; }
+.yt-slot-inner p { font-size: 13px; }
+.yt-slot-inner small { font-size: 11px; opacity: 0.5; }
+.yt-embed-area { margin-top: 8px; }
+.yt-embed-area input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; }
+.yt-embed-area input:focus { border-color: var(--primary); }
+
+/* ── FLOW DIAGRAM ── */
+.flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0; margin: 12px 0; }
+.flow-box { background: var(--primary); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; text-align: center; min-width: 90px; }
+.flow-box.cs { background: #065F46; }
+.flow-box.ops { background: #92400E; }
+.flow-box.fin { background: #9D174D; }
+.flow-box.sale { background: #6D28D9; }
+.flow-box.sm { background: #1D4ED8; }
+.flow-arrow { color: var(--muted); font-size: 18px; padding: 0 6px; }
+
+/* ── STAT CARDS ── */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.stat-value { font-size: 28px; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 12px; color: var(--muted); }
+.stat-card.accent .stat-value { color: var(--accent); }
+.stat-card.success .stat-value { color: var(--success); }
+.stat-card.danger .stat-value { color: var(--danger); }
+
+/* ── SOP GRID ── */
+.sop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.sop-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.15s; }
+.sop-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(27,79,187,0.1); transform: translateY(-1px); }
+.sop-card.priority-card { border-left: 4px solid var(--accent); }
+.sop-card-code { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.sop-card-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.sop-card-depts { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.sop-card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--muted); }
+
+/* ── DEPT CARDS ── */
+.dept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.dept-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.dept-card-icon { font-size: 24px; margin-bottom: 8px; }
+.dept-card-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.dept-card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── SECTION TITLES ── */
+.section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.section-title .count { background: var(--primary); color: #fff; font-size: 11px; padding: 1px 7px; border-radius: 99px; font-weight: 600; }
+
+/* ── PRINT ── */
+@media print {
+  .sidebar, .topbar, .topbar-actions, .yt-embed-area, .btn { display: none !important; }
+  .main { overflow: visible; }
+  .content { overflow: visible; padding: 0; }
+  .page { display: block !important; }
+  .card { break-inside: avoid; }
+}
+
+/* ── MISC ── */
+.highlight { background: #FFFBEB; border-left: 3px solid var(--warning); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; margin: 8px 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tag-new { background: var(--success); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; vertical-align: middle; }
+.tag-priority { background: var(--danger); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; vertical-align: middle; }
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-tag">
+      <div class="logo-icon">THG</div>
+      <div class="logo-text">
+        <div class="title">THG Hub</div>
+        <div class="subtitle">SOP Training Nội Bộ</div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" placeholder="🔍  Tìm SOP..." oninput="searchSOPs(this.value)" />
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-item active" onclick="nav(this,'home')">
+      <span class="nav-icon">🏠</span> Dashboard
+    </div>
+  </div>
+
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Sale & Marketing</div>
+    <div class="nav-item" onclick="nav(this,'sop001')">
+      <span class="nav-icon">📣</span> SOP-001 · Quản lý Leads
+    </div>
+    <div class="nav-item" onclick="nav(this,'sop002')">
+      <span class="nav-icon">🤝</span> SOP-002 · Bàn giao Khách
+    </div>
+  </div>
+
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">CSKH & Vận hành</div>
+    <div class="nav-item" onclick="nav(this,'sop003')">
+      <span class="nav-icon">📦</span> SOP-003 · POD / Dropship
+    </div>
+    <div class="nav-item" onclick="nav(this,'sop004')">
+      <span class="nav-icon">✈️</span> SOP-004 · Express Shipping
+    </div>
+    <div class="nav-item" onclick="nav(this,'sop005')">
+      <span class="nav-icon">🏭</span> SOP-005 · Warehouse
+    </div>
+  </div>
+
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Tài chính</div>
+    <div class="nav-item" onclick="nav(this,'sop006')">
+      <span class="nav-icon">💰</span> SOP-006 · Thu Tiền & Công Nợ
+      <span class="nav-badge">P1</span>
+    </div>
+    <div class="nav-item" onclick="nav(this,'sop007')">
+      <span class="nav-icon">🔗</span> SOP-007 · CSKH ↔ Kế Toán ↔ WH
+    </div>
+  </div>
+
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Hệ thống</div>
+    <div class="nav-item" onclick="nav(this,'pancake')">
+      <span class="nav-icon">💬</span> Pancake CRM
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-breadcrumb" id="breadcrumb">THG Hub <span>/ Dashboard</span></div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" onclick="window.print()">🖨️ In trang</button>
+      <button class="btn btn-primary">📥 Export PDF</button>
+    </div>
+  </div>
+  <div class="content">
+
+<!-- ══════════ PAGE: HOME ══════════ -->
+<section class="page active" id="page-home">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-value">7</div><div class="stat-label">SOP đang hoạt động</div></div>
+    <div class="stat-card success"><div class="stat-value">5</div><div class="stat-label">Phòng ban liên quan</div></div>
+    <div class="stat-card accent"><div class="stat-value">1</div><div class="stat-label">SOP ưu tiên khẩn</div></div>
+    <div class="stat-card danger"><div class="stat-value">4</div><div class="stat-label">Mảng dịch vụ</div></div>
+  </div>
+
+  <div class="dept-grid">
+    <div class="dept-card"><div class="dept-card-icon">📣</div><div class="dept-card-name">Sale Marketing</div><div class="dept-card-desc">Tìm kiếm & phân loại leads từ đa kênh. Phối hợp AI Chatbot để tối ưu tư vấn.</div></div>
+    <div class="dept-card"><div class="dept-card-icon">🎯</div><div class="dept-card-name">Sale</div><div class="dept-card-desc">Tư vấn, chốt đơn và bàn giao khách về Backend. Không oversell vượt năng lực hệ thống.</div></div>
+    <div class="dept-card"><div class="dept-card-icon">🎧</div><div class="dept-card-name">CSKH</div><div class="dept-card-desc">Đầu mối tương tác với khách sau bàn giao. Xử lý đơn, trouble, thu tiền và công nợ.</div></div>
+    <div class="dept-card"><div class="dept-card-icon">⚙️</div><div class="dept-card-name">Vận hành</div><div class="dept-card-desc">Xử lý nghiệp vụ kỹ thuật: mua label, kho, tracking, phối hợp nhà cung cấp.</div></div>
+    <div class="dept-card"><div class="dept-card-icon">📊</div><div class="dept-card-name">Kế toán</div><div class="dept-card-desc">Xác nhận thanh toán, quản lý sổ sách, đối soát công nợ định kỳ với CSKH.</div></div>
+    <div class="dept-card"><div class="dept-card-icon">👑</div><div class="dept-card-name">Quản lý / CEO</div><div class="dept-card-desc">Quyết định escalation, phê duyệt chính sách thanh toán, giải quyết mâu thuẫn liên phòng.</div></div>
+  </div>
+
+  <div class="section-title">Tất cả SOP <span class="count">7</span></div>
+  <div class="sop-grid" id="sop-grid">
+    <div class="sop-card" onclick="nav(document.querySelector('[onclick*=sop001]'),'sop001')">
+      <div class="sop-card-code">SOP-001</div>
+      <div class="sop-card-title">Quản lý Leads — SM → Sale</div>
+      <div class="sop-card-depts"><span class="dept dept-sm">Sale Marketing</span><span class="dept dept-sale">Sale</span></div>
+      <div class="sop-card-footer"><span>📣 Kênh tiếp cận</span><span>v1.0</span></div>
+    </div>
+    <div class="sop-card" onclick="nav(document.querySelector('[onclick*=sop002]'),'sop002')">
+      <div class="sop-card-code">SOP-002</div>
+      <div class="sop-card-title">Bàn giao Khách — Sale → Backend</div>
+      <div class="sop-card-depts"><span class="dept dept-sale">Sale</span><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+      <div class="sop-card-footer"><span>🤝 7 kịch bản</span><span>v1.1 · 24/09/2025</span></div>
+    </div>
+    <div class="sop-card" onclick="nav(document.querySelector('[onclick*=sop003]'),'sop003')">
+      <div class="sop-card-code">SOP-003</div>
+      <div class="sop-card-title">Vận hành POD / Dropship</div>
+      <div class="sop-card-depts"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+      <div class="sop-card-footer"><span>📦 In-on-demand</span><span>v1.0</span></div>
+    </div>
+    <div class="sop-card" onclick="nav(document.querySelector('[onclick*=sop004]'),'sop004')">
+      <div class="sop-card-code">SOP-004</div>
+      <div class="sop-card-title">Vận hành Express Shipping</div>
+      <div class="sop-card-depts"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+      <div class="sop-card-footer"><span>✈️ Xuất quốc tế</span><span>v1.0</span></div>
+    </div>
+    <div class="sop-card" onclick="nav(document.querySelector('[onclick*=sop005]'),'sop005')">
+      <div class="sop-card-code">SOP-005</div>
+      <div class="sop-card-title">Vận hành Warehouse (Kho US)</div>
+      <div class="sop-card-depts"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span><span class="dept dept-ke-toan">Kế toán</span></div>
+      <div class="sop-card-footer"><span>🏭 Inbound / Outbound</span><span>v1.2</span></div>
+    </div>
+    <div class="sop-card priority-card" onclick="nav(document.querySelector('[onclick*=sop006]'),'sop006')">
+      <div class="sop-card-code">SOP-006 &nbsp;<span class="tag-priority">PRIORITY #1</span></div>
+      <div class="sop-card-title">Thu Tiền & Quản lý Công Nợ</div>
+      <div class="sop-card-depts"><span class="dept dept-cskh">CSKH</span><span class="dept dept-ke-toan">Kế toán</span><span class="dept dept-ql">Quản lý</span></div>
+      <div class="sop-card-footer"><span>💰 Tất cả mảng dịch vụ</span><span>v1.0</span></div>
+    </div>
+    <div class="sop-card" onclick="nav(document.querySelector('[onclick*=sop007]'),'sop007')">
+      <div class="sop-card-code">SOP-007</div>
+      <div class="sop-card-title">Liên phòng ban: CSKH ↔ Kế toán ↔ Warehouse</div>
+      <div class="sop-card-depts"><span class="dept dept-cskh">CSKH</span><span class="dept dept-ke-toan">Kế toán</span><span class="dept dept-van-hanh">Vận hành</span></div>
+      <div class="sop-card-footer"><span>🔗 Cross-department</span><span>v1.0</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-001 ══════════ -->
+<section class="page" id="page-sop001">
+  <div class="sop-header">
+    <div class="sop-code">SOP-001 · Sale Marketing</div>
+    <div class="sop-title-big">Quản lý Leads — Sale Marketing → Sale</div>
+    <div class="sop-meta">
+      <div class="sop-meta-item">📋 Phiên bản: v1.0</div>
+      <div class="sop-meta-item">👤 Chủ sở hữu: Sale Marketing</div>
+      <div class="sop-meta-item">📅 Cập nhật: 2025</div>
+    </div>
+    <div class="sop-badges">
+      <span class="badge badge-dept">Sale Marketing</span>
+      <span class="badge badge-dept">Sale</span>
+      <span class="badge badge-dept">AI Chatbot</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎯 Mục đích & Phạm vi</div>
+    <div class="card-subtitle" style="margin-top:8px;font-size:13px;color:var(--text);line-height:1.7">
+      Chuẩn hóa quy trình tiếp nhận, phân loại và xử lý leads từ đa kênh. Đảm bảo không bỏ sót leads và thông tin được cập nhật đầy đủ vào file quản lý Leads trước khi chuyển Sale xử lý.<br><br>
+      <strong>Phạm vi:</strong> Áp dụng cho toàn bộ SM và Sale, với tất cả 4 mảng dịch vụ: POD, Dropship, Express, Warehouse.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📥 Nguồn Leads</div>
+    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:#EFF6FF;border-radius:8px;padding:12px"><div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#1D4ED8">🔵 Nguồn chủ lực (Sale phụ trách)</div><div style="font-size:12px;color:#1E40AF;line-height:1.6">• Fanpage quảng cáo (3 page)<br>• AI Chatbot 24/7 tư vấn tự động<br>• Leads có sẵn từ công ty / CEO</div></div>
+      <div style="background:#F0FDF4;border-radius:8px;padding:12px"><div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#065F46">🟢 Nguồn SM chủ động</div><div style="font-size:12px;color:#166534;line-height:1.6">• Zalo, Telegram<br>• YouTube, TikTok, Instagram<br>• Facebook organic</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Các bước thực hiện</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sm">Sale Marketing</span><span class="dept dept-sale">Sale + AI Chatbot</span></div>
+          <div class="step-action">Tiếp nhận và phân luồng Leads</div>
+          <div class="step-detail"><ul><li><strong>SM</strong> xử lý leads từ: YouTube, Facebook, TikTok, Instagram, Zalo, Telegram</li><li><strong>Sale + AI Chatbot</strong> xử lý leads từ Fanpage quảng cáo và kênh chính của công ty</li><li>Sale quan sát tư vấn của chatbot, support khi cần thiết</li></ul></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sm">Sale Marketing</span><span class="dept dept-sale">Sale</span></div>
+          <div class="step-action">Thu thập & phân tích thông tin khách hàng</div>
+          <div class="step-detail">Bắt buộc xác định 3 thông tin:<ul><li>📍 <strong>Thị trường:</strong> US, UK, EU, AU...</li><li>🏷️ <strong>Mảng dịch vụ:</strong> POD / Warehouse / Express / Dropship</li><li>💬 <strong>Nhu cầu cụ thể:</strong> Tìm xưởng, tìm sản phẩm, tìm kho, tìm line ship...</li></ul></div>
+          <div class="step-note info">ℹ️ Tất cả thông tin PHẢI được cập nhật vào <strong>File Quản lý Leads</strong> ngay khi thu thập.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sale">Sale</span></div>
+          <div class="step-action">Tư vấn và chốt thông tin</div>
+          <div class="step-detail">Sale tư vấn chi tiết dịch vụ phù hợp với nhu cầu khách. Tạo nhóm Zalo/Telegram với khách khi đủ thông tin. Không cam kết vượt quá năng lực hệ thống.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sale">Sale</span></div>
+          <div class="step-action">Retrain AI Chatbot</div>
+          <div class="step-detail">Sale quan sát quá trình tư vấn của chatbot AI và ghi nhận các case chưa tốt để retrain, cải thiện khả năng tư vấn tự động.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-slot" style="margin-top:12px" onclick="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div class="yt-slot-inner">
+        <div class="yt-play"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <p>Nhấn để nhúng video YouTube</p>
+        <small>Dán link YouTube bên dưới</small>
+      </div>
+    </div>
+    <div class="yt-embed-area" style="display:none">
+      <input type="text" placeholder="Dán link YouTube tại đây (vd: https://youtube.com/watch?v=...)" onchange="embedYT(this,'yt-sop001')" />
+      <div id="yt-sop001" style="margin-top:8px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-002 ══════════ -->
+<section class="page" id="page-sop002">
+  <div class="sop-header">
+    <div class="sop-code">SOP-002 · Sale → Backend</div>
+    <div class="sop-title-big">Bàn giao Khách hàng — Sale → CSKH / Vận hành</div>
+    <div class="sop-meta">
+      <div class="sop-meta-item">📋 v1.1 · Cập nhật 24/09/2025</div>
+      <div class="sop-meta-item">👤 Chủ sở hữu: Sale + CSKH</div>
+    </div>
+    <div class="sop-badges"><span class="badge badge-dept">Sale</span><span class="badge badge-dept">CSKH</span><span class="badge badge-dept">Vận hành</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Các bước bàn giao</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sale">Sale</span></div>
+          <div class="step-action">Chuẩn bị hồ sơ bàn giao</div>
+          <div class="step-detail">Đảm bảo đủ: thông tin cá nhân khách, mảng dịch vụ, nhu cầu cụ thể, lịch sử trao đổi, cam kết đã đưa ra, hạn mức & hình thức thanh toán.</div>
+          <div class="step-note danger">🚫 KHÔNG bàn giao khi thông tin chưa đầy đủ hoặc đã oversell vượt năng lực hệ thống.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sale">Sale</span><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Bàn giao chính thức</div>
+          <div class="step-detail">Sale giới thiệu CSKH phụ trách với khách qua nhóm chat. CSKH xác nhận đã nhận và hiểu hồ sơ. Cập nhật vào THG Hub.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">CSKH tiếp nhận và chăm sóc liên tục</div>
+          <div class="step-detail">CSKH là đầu mối duy nhất với khách từ thời điểm bàn giao. Sale không tự ý can thiệp trừ khi CSKH yêu cầu.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚠️ 7 Kịch bản thực tế & Cách xử lý</div>
+    <table class="tl-table" style="margin-top:12px">
+      <thead><tr><th>Kịch bản</th><th>Vấn đề</th><th>Kết quả</th><th>Trạng thái</th></tr></thead>
+      <tbody>
+        <tr><td><strong>KB1</strong> – Suôn sẻ</td><td>Sale bàn giao đủ thông tin, Backend nhận và chăm sóc tốt</td><td>Năng suất cao, khách quay lại</td><td><span class="tl-status tl-ok">✅ Lý tưởng</span></td></tr>
+        <tr><td><strong>KB2</strong> – Backend yếu</td><td>CS phản hồi chậm, vận hành xử lý sai / chậm</td><td>Khách than phiền, Sale phải quay lại hỗ trợ</td><td><span class="tl-status tl-warn">⚠️ Chú ý</span></td></tr>
+        <tr><td><strong>KB3</strong> – Sale oversell</td><td>Sale hứa vượt khả năng hệ thống</td><td>Đơn trễ, refund, mất niềm tin</td><td><span class="tl-status tl-danger">🚫 Nghiêm cấm</span></td></tr>
+        <tr><td><strong>KB4</strong> – Sự cố hệ thống</td><td>OMS/WMS lỗi, hãng vận chuyển delay</td><td>CS quá tải, cần quy trình khủng hoảng rõ ràng</td><td><span class="tl-status tl-warn">⚠️ Cần protocol</span></td></tr>
+        <tr><td><strong>KB5</strong> – Upsell</td><td>Khách tin tưởng, muốn mở rộng dịch vụ</td><td>Tăng doanh thu, quan hệ lâu dài</td><td><span class="tl-status tl-ok">✅ Cơ hội</span></td></tr>
+        <tr><td><strong>KB6</strong> – Khách churn</td><td>Backend không follow đủ, khách im lặng rời đi</td><td>Mất doanh thu mà không ai nhận ra</td><td><span class="tl-status tl-danger">🚫 Nguy hiểm</span></td></tr>
+        <tr><td><strong>KB7</strong> – Mâu thuẫn nội bộ</td><td>Tranh cãi về hoa hồng, KPI, phân công</td><td>Giảm tinh thần, ảnh hưởng năng suất</td><td><span class="tl-status tl-warn">⚠️ Cần giải quyết sớm</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-slot" style="margin-top:12px">
+      <div class="yt-slot-inner">
+        <div class="yt-play"><svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <p>Chưa có video — Nhúng link YouTube tại đây</p>
+      </div>
+    </div>
+    <div class="yt-embed-area" style="margin-top:8px">
+      <input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-sop002')" />
+      <div id="yt-sop002"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-003 ══════════ -->
+<section class="page" id="page-sop003">
+  <div class="sop-header">
+    <div class="sop-code">SOP-003 · POD & Dropship</div>
+    <div class="sop-title-big">Vận hành POD / Dropship — CSKH ↔ Vận hành</div>
+    <div class="sop-meta"><div class="sop-meta-item">📋 v1.0</div><div class="sop-meta-item">👤 CSKH + Vận hành</div></div>
+    <div class="sop-badges"><span class="badge badge-dept">CSKH</span><span class="badge badge-dept">Vận hành</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏰ Mốc thời gian cố định</div>
+    <table class="tl-table" style="margin-top:12px">
+      <thead><tr><th>Thời điểm</th><th>Hành động</th><th>Người thực hiện</th></tr></thead>
+      <tbody>
+        <tr><td><strong>15:00 Thứ 3 & Thứ 6</strong></td><td>Cập nhật trạng thái đơn hàng định kỳ cho khách</td><td><span class="dept dept-cskh">CSKH</span></td></tr>
+        <tr><td><strong>Trước 16:00 hằng ngày</strong></td><td>Cập nhật trouble vào file Trouble nếu có phát sinh</td><td><span class="dept dept-cskh">CSKH</span> + <span class="dept dept-van-hanh">Vận hành</span></td></tr>
+        <tr><td><strong>Trước 17:00 hằng ngày</strong></td><td>Thông báo khách về tình trạng đơn có trouble</td><td><span class="dept dept-cskh">CSKH</span></td></tr>
+        <tr><td><strong>Tối thiểu 2 ngày/lần</strong></td><td>Update tình trạng đơn trouble cho khách nếu không có mốc cố định</td><td><span class="dept dept-cskh">CSKH</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Quy trình xử lý đơn POD/Dropship</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Tiếp nhận & báo giá</div>
+          <div class="step-detail">Nhận thông tin đơn từ khách → Báo giá dịch vụ → Thông báo cho Vận hành về đơn phát sinh.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Xử lý đơn & cung cấp tracking</div>
+          <div class="step-detail">Làm việc với xưởng sản xuất / nguồn hàng → Cung cấp mã tracking cho CSKH.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Cập nhật tracking & tính tiền</div>
+          <div class="step-detail">Update tracking cho khách định kỳ (Thứ 3, Thứ 6 lúc 15:00) → Tính phí cuối → Báo giá và chốt thanh toán → Theo dõi công nợ phối hợp Kế toán.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Theo dõi đến khi giao thành công</div>
+          <div class="step-detail">Cùng keep check trạng thái đơn từ xuất kho → delivered. Vận hành phản hồi thông tin phát sinh. CSKH thông báo khách.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num warn">!</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Xử lý Trouble (nếu có)</div>
+          <div class="step-detail">CSKH đưa vấn đề vào <strong>File Trouble</strong> trước 16:00 → Vận hành xử lý, phối hợp nhà cung cấp → CSKH thông báo khách trước 17:00. After-sales: Vận hành đề xuất phương án, CSKH trao đổi với khách.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-embed-area" style="margin-top:8px">
+      <input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-sop003')" />
+      <div id="yt-sop003"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-004 ══════════ -->
+<section class="page" id="page-sop004">
+  <div class="sop-header">
+    <div class="sop-code">SOP-004 · Express Shipping</div>
+    <div class="sop-title-big">Vận hành Express — CSKH ↔ Vận hành</div>
+    <div class="sop-meta"><div class="sop-meta-item">📋 v1.0</div><div class="sop-meta-item">👤 CSKH + Vận hành</div></div>
+    <div class="sop-badges"><span class="badge badge-dept">CSKH</span><span class="badge badge-dept">Vận hành</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📦 Quy định đóng đơn theo khối lượng</div>
+    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:#EFF6FF;border-radius:10px;padding:14px"><div style="font-weight:700;color:#1D4ED8;margin-bottom:6px">Dưới 10 đơn/ngày</div><div style="font-size:13px;color:#1E40AF">CSKH + Vận hành đóng đơn tại <strong>kho TPHCM</strong></div></div>
+      <div style="background:#FFF7ED;border-radius:10px;padding:14px"><div style="font-weight:700;color:#92400E;margin-bottom:6px">Từ 10 đơn/ngày trở lên</div><div style="font-size:13px;color:#78350F">Đẩy ra kho đối tác: <strong>Amilo HCM</strong> hoặc <strong>Amilo Hà Nội</strong> để đóng đơn</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Quy trình Express</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Tiếp nhận đơn & báo giá</div>
+          <div class="step-detail">Nhận thông tin từ khách → Báo cho Vận hành tính toán giá → Báo giá dịch vụ vận chuyển cho khách.<br><strong>Lưu ý:</strong> Đảm bảo review trọng lượng và kích thước (dims) trước khi đưa vận hành.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Thiết kế line vận chuyển</div>
+          <div class="step-detail">Thiết kế line vận chuyển phù hợp cho từng đơn. Làm việc với hãng vận chuyển và kho bãi.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Kiểm tra hàng tại kho</div>
+          <div class="step-detail"><strong>CSKH</strong> nhận hàng trực tiếp tại kho HCM (kho HN & China: nhân viên kho xử lý). Phối hợp Vận hành cân đo kiện hàng.<br>CSKH báo Vận hành: cân nặng thực tế + kích thước thực tế + kiểm tra có vượt cân báo giá ban đầu không.<br>Vận hành xác minh → CSKH báo kết quả cuối cùng cho khách.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Mua label & booking xe</div>
+          <div class="step-detail">1. CSKH tiếp nhận thông tin thay đổi từ khách (nếu có)<br>2. CSKH báo Vận hành để mua label chính xác<br>3. Vận hành mua label & in label<br>4. CSKH dán label lên kiện hàng<br>5. Vận hành book xe giao đến hãng vận chuyển</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Cập nhật tracking & thanh toán</div>
+          <div class="step-detail"><strong>ePacket:</strong> Có tracking ngay khi mua label → CSKH cập nhật ngay.<br><strong>Đơn thùng/lô lớn:</strong> Phải đợi hãng vận chuyển báo tracking → Vận hành nhận → CSKH cập nhật cho khách.<br>Sau khi có đủ thông tin: tính phí cuối, chốt thanh toán, theo dõi công nợ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-embed-area" style="margin-top:8px"><input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-sop004')" /><div id="yt-sop004"></div></div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-005 ══════════ -->
+<section class="page" id="page-sop005">
+  <div class="sop-header">
+    <div class="sop-code">SOP-005 · Warehouse</div>
+    <div class="sop-title-big">Vận hành Kho (Warehouse) — CSKH ↔ Vận hành</div>
+    <div class="sop-meta"><div class="sop-meta-item">📋 v1.2</div><div class="sop-meta-item">👤 CSKH + Vận hành + Kế toán</div></div>
+    <div class="sop-badges"><span class="badge badge-dept">CSKH</span><span class="badge badge-dept">Vận hành</span><span class="badge badge-dept">Kế toán</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚨 Nguyên tắc vàng</div>
+    <div class="rules-box" style="margin-top:12px">
+      <div class="rule"><span class="rule-icon">🔒</span><div>Mọi tương tác với khách hàng được thực hiện <strong>qua CSKH</strong>. Vận hành KHÔNG tương tác trực tiếp với khách trừ trường hợp đặc biệt có yêu cầu.</div></div>
+      <div class="rule"><span class="rule-icon">🚫</span><div>CSKH <strong>KHÔNG lên đơn thay khách</strong> (IR/OR/tạo sản phẩm). Hướng dẫn để khách tự thực hiện → tránh chịu trách nhiệm khi sai sót.</div></div>
+      <div class="rule"><span class="rule-icon">💰</span><div>Trường thông tin "Khai giá" trên OMS phải luôn để <strong>bằng 0</strong> nếu khách không yêu cầu mua bảo hiểm.</div></div>
+      <div class="rule"><span class="rule-icon">✅</span><div>Khi báo mua label = CSKH đã <strong>review 100%</strong> thông tin đơn và xác nhận đúng.</div></div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:0">
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">📥 Quy trình NHẬP KHO (Inbound)</div>
+      <div style="margin-top:12px" class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+            <div class="step-action">Chuẩn bị trước khi hàng về</div>
+            <div class="step-detail">CSKH xác nhận với khách về thông tin IR. Vận hành xử lý data IR, báo kho US chuẩn bị không gian & bao bì. Phối hợp xác định hình thức đóng gói.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-van-hanh">Vận hành</span></div>
+            <div class="step-action">Kiểm tra khi hàng đến kho</div>
+            <div class="step-detail">Scan IR, kiểm tra trạng thái nhập kho. Verify dimension & weight (cộng thêm trọng lượng bao bì). Cập nhật lên hệ thống.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+            <div class="step-action">Xác nhận với khách</div>
+            <div class="step-detail">Thông báo nhập kho thành công và thời điểm có thể bắt đầu tạo đơn xuất kho.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">📤 Quy trình XUẤT KHO (Outbound)</div>
+      <div style="margin-top:12px" class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+            <div class="step-action">Kiểm tra tài chính & đơn hàng</div>
+            <div class="step-detail">① Đối chiếu số đơn, confirm với khách lúc <strong>16:00</strong> hằng ngày.<br>② Kiểm tra tài chính: công nợ cũ đã TT? / số dư top-up đủ?<br>③ Kiểm tra OMS: khai giá = 0, dims & weight chính xác.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+            <div class="step-action">Báo Vận hành mua label</div>
+            <div class="step-detail">CSKH confirm đầy đủ → Báo Vận hành. Lúc này CSKH chịu hoàn toàn trách nhiệm về thông tin đã xác nhận.</div>
+            <div class="step-note danger">🚫 Không báo mua label khi chưa review đủ thông tin!</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-van-hanh">Vận hành</span></div>
+            <div class="step-action">Mua label & cập nhật tracking</div>
+            <div class="step-detail">Mua label → Cập nhật tracking number trên hệ thống → Báo CSKH hoàn tất.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+          <div class="step-body">
+            <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+            <div class="step-action">Theo dõi & xử lý đơn lỗi / hủy</div>
+            <div class="step-detail">Đơn lỗi thông tin: Vận hành báo CSKH → CSKH hướng dẫn khách tự sửa → khách tạo lại đơn.<br>Đơn hủy: Vận hành hold → CSKH trao đổi phương án với khách → Thực hiện theo quyết định khách.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-embed-area" style="margin-top:8px"><input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-sop005')" /><div id="yt-sop005"></div></div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-006: THU TIỀN (PRIORITY) ══════════ -->
+<section class="page" id="page-sop006">
+  <div class="sop-header priority">
+    <div class="sop-code">SOP-006 · Tài chính · ⭐ PRIORITY #1</div>
+    <div class="sop-title-big">Thu Tiền & Quản lý Công Nợ</div>
+    <div class="sop-meta">
+      <div class="sop-meta-item">📋 v1.0 · Mới ban hành</div>
+      <div class="sop-meta-item">👤 CSKH + Kế toán + Quản lý</div>
+      <div class="sop-meta-item">🌐 Áp dụng tất cả mảng dịch vụ</div>
+    </div>
+    <div class="sop-badges">
+      <span class="badge badge-priority">🔴 KHẨN CẤP</span>
+      <span class="badge badge-dept">CSKH</span>
+      <span class="badge badge-dept">Kế toán</span>
+      <span class="badge badge-dept">Quản lý</span>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--danger)">
+    <div class="card-title">🚨 Vấn đề hiện tại cần giải quyết</div>
+    <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:#FEF2F2;border-radius:8px;padding:12px;font-size:13px;line-height:1.6;color:#991B1B">
+        <div style="font-weight:700;margin-bottom:6px">❌ Điểm nghẽn</div>
+        Công nợ khách hàng mảng Warehouse tích lũy 3–6 tháng mới thu được tiền, gây áp lực dòng tiền nghiêm trọng cho công ty.
+      </div>
+      <div style="background:#F0FDF4;border-radius:8px;padding:12px;font-size:13px;line-height:1.6;color:#166534">
+        <div style="font-weight:700;margin-bottom:6px">✅ Mục tiêu SOP này</div>
+        Rút ngắn vòng thu tiền xuống ≤ 30 ngày. Chuẩn hóa quy trình, phân công rõ trách nhiệm, tránh để nợ "chìm".
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💳 Hai hình thức thanh toán</div>
+    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="border:2px solid #BFDBFE;border-radius:10px;padding:16px">
+        <div style="font-weight:700;font-size:14px;color:#1D4ED8;margin-bottom:8px">🔵 Top-up (Nạp trước)</div>
+        <div style="font-size:13px;color:var(--text);line-height:1.7">
+          Khách nạp tiền vào tài khoản THG Hub. Mỗi đơn tự động trừ vào số dư.<br><br>
+          <strong>Ưu điểm:</strong> Đơn giản, không lo nợ xấu.<br>
+          <strong>Yêu cầu CSKH:</strong> Check số dư đủ trước khi xử lý đơn.
+        </div>
+      </div>
+      <div style="border:2px solid #FED7AA;border-radius:10px;padding:16px">
+        <div style="font-weight:700;font-size:14px;color:#92400E;margin-bottom:8px">🟠 Công nợ (Thanh toán sau)</div>
+        <div style="font-size:13px;color:var(--text);line-height:1.7">
+          Khách thanh toán theo kỳ (tuần/tháng) sau khi hoàn thành đơn.<br><br>
+          <strong>Điều kiện:</strong> Phải có hạn mức tín dụng được duyệt bởi Quản lý.<br>
+          <strong>Rủi ro:</strong> Cần quy trình nhắc nợ chặt chẽ.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Giai đoạn 1 — Thiết lập điều khoản thanh toán (Onboarding)</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-sale">Sale</span><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Xác định hình thức thanh toán khi onboard khách mới</div>
+          <div class="step-detail">Sale/CSKH trao đổi và xác định: Top-up hay Công nợ? Nếu công nợ: xác định hạn mức và kỳ thanh toán (tuần hay tháng).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-ql">Quản lý</span></div>
+          <div class="step-action">Phê duyệt hạn mức tín dụng (nếu là công nợ)</div>
+          <div class="step-detail">Quản lý xác nhận hạn mức công nợ cho phép dựa trên lịch sử và quy mô khách. Không tự ý cấp hạn mức ngoài phê duyệt.</div>
+          <div class="step-note danger">🚫 KHÔNG cho khách công nợ mà chưa có phê duyệt từ Quản lý.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-ke-toan">Kế toán</span></div>
+          <div class="step-action">Ghi nhận vào hệ thống</div>
+          <div class="step-detail">CSKH cập nhật hình thức TT + hạn mức vào profile khách trên THG Hub. Kế toán ghi vào hệ thống kế toán nội bộ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Giai đoạn 2 — Kiểm tra tài chính trước khi xử lý đơn</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Kiểm tra tình trạng tài chính của khách</div>
+          <div class="step-detail">
+            <strong>Khách Top-up:</strong> Kiểm tra số dư tài khoản ≥ giá trị đơn hàng mới.<br>
+            <strong>Khách Công nợ:</strong> Kiểm tra tổng dư nợ hiện tại + giá trị đơn mới ≤ hạn mức được duyệt.
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Xử lý theo kết quả kiểm tra</div>
+          <div class="step-detail">
+            ✅ <strong>Đủ điều kiện:</strong> Tiến hành xử lý đơn bình thường.<br>
+            🔴 <strong>Top-up không đủ số dư:</strong> Thông báo khách nạp thêm. Hold đơn đến khi nhận được xác nhận nạp tiền từ Kế toán.<br>
+            🔴 <strong>Công nợ vượt hạn mức:</strong> Hold đơn + Thông báo khách thanh toán một phần nợ cũ trước.
+          </div>
+          <div class="step-note">💡 Mẫu tin nhắn hold đơn: <em>"Anh/chị [tên], đơn hàng ngày [ngày] đang tạm hold do số dư/hạn mức chưa đủ. THG cần nhận được xác nhận nạp tiền / thanh toán trước [giờ] hôm nay để xử lý kịp tiến độ. Cảm ơn anh/chị."</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Giai đoạn 3 — Tạo & Gửi Invoice</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Tính chi phí cuối cùng sau khi đơn hoàn thành</div>
+          <div class="step-detail">Sau khi đơn có trạng thái delivered/confirmed: Tổng hợp tất cả phí phát sinh (phí vận chuyển, label, xử lý kho, phí dịch vụ, phí phụ nếu có).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Tạo invoice & gửi cho khách</div>
+          <div class="step-detail">Tạo invoice trên THG Hub với đầy đủ: ngày, chi tiết phí, tổng cộng, hạn thanh toán.<br>Gửi invoice cho khách qua Zalo/Telegram/Email.<br>Ghi nhận trạng thái invoice: <strong>Pending</strong>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-ke-toan">Kế toán</span></div>
+          <div class="step-action">Thông báo Kế toán về invoice đã phát</div>
+          <div class="step-detail">CSKH thông báo Kế toán: tên khách, số invoice, số tiền, hạn TT. Kế toán ghi nhận vào sổ theo dõi công nợ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Giai đoạn 4 — Lịch nhắc nợ & Escalation</div>
+    <table class="tl-table" style="margin-top:12px">
+      <thead><tr><th>Ngày</th><th>Hành động</th><th>Kênh</th><th>Người thực hiện</th><th>Trạng thái</th></tr></thead>
+      <tbody>
+        <tr><td><strong>D+0</strong> (Ngày phát invoice)</td><td>Gửi invoice đầy đủ cho khách, xác nhận nhận được</td><td>Zalo / Telegram</td><td><span class="dept dept-cskh">CSKH</span></td><td><span class="tl-status tl-info">📤 Phát hành</span></td></tr>
+        <tr><td><strong>D+3</strong></td><td>Check xem khách đã xem invoice chưa. Hỏi nhẹ nếu chưa có phản hồi</td><td>Zalo</td><td><span class="dept dept-cskh">CSKH</span></td><td><span class="tl-status tl-info">🔔 Nhắc nhẹ</span></td></tr>
+        <tr><td><strong>D+7</strong></td><td>Nhắc nợ lần 1 — Gửi lại invoice kèm số tài khoản thanh toán</td><td>Zalo + message</td><td><span class="dept dept-cskh">CSKH</span></td><td><span class="tl-status tl-warn">⚠️ Nhắc lần 1</span></td></tr>
+        <tr><td><strong>D+14</strong></td><td>Nhắc nợ lần 2 — Gọi điện trực tiếp + gửi tin nhắn chính thức</td><td>Zalo + Điện thoại</td><td><span class="dept dept-cskh">CSKH</span></td><td><span class="tl-status tl-warn">⚠️ Nhắc lần 2</span></td></tr>
+        <tr><td><strong>D+21</strong></td><td>Thông báo: Đơn hàng mới sẽ bị hold nếu chưa thanh toán</td><td>Zalo + Email</td><td><span class="dept dept-cskh">CSKH</span> → báo <span class="dept dept-ql">Quản lý</span></td><td><span class="tl-status tl-danger">🔴 Cảnh báo</span></td></tr>
+        <tr><td><strong>D+30</strong></td><td>Hold tất cả đơn hàng mới. Escalate lên Quản lý</td><td>Nội bộ</td><td><span class="dept dept-ql">Quản lý</span></td><td><span class="tl-status tl-danger">🔴 Hold dịch vụ</span></td></tr>
+        <tr><td><strong>D+45+</strong></td><td>Quản lý liên hệ trực tiếp với cấp cao của khách. Xem xét phương án xử lý pháp lý nếu cần</td><td>Cuộc gọi / Email chính thức</td><td><span class="dept dept-ql">Quản lý / CEO</span></td><td><span class="tl-status tl-danger">🚨 Escalate CEO</span></td></tr>
+      </tbody>
+    </table>
+    <div class="highlight" style="margin-top:12px">💡 <strong>Quan trọng:</strong> Mọi lần nhắc nợ phải được ghi lại trong THG Hub (ghi chú trên profile khách) với ngày giờ và nội dung liên hệ. Kế toán theo dõi và audit hàng tuần.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Giai đoạn 5 — Xác nhận thanh toán</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Nhận bằng chứng thanh toán từ khách</div>
+          <div class="step-detail">Khách gửi screenshot/bill chuyển khoản → CSKH lưu lại và chuyển ngay cho Kế toán verify.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-ke-toan">Kế toán</span></div>
+          <div class="step-action">Xác nhận tiền về tài khoản</div>
+          <div class="step-detail">Kế toán kiểm tra tài khoản ngân hàng, xác nhận tiền đến. Cập nhật trạng thái invoice: <strong>Paid</strong>. Thông báo lại CSKH trong vòng 2 giờ làm việc.</div>
+          <div class="step-note info">ℹ️ Nếu số tiền nhận được không khớp → Kế toán thông báo CSKH để làm rõ với khách trước khi xác nhận.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Thông báo xác nhận cho khách & cập nhật hệ thống</div>
+          <div class="step-detail">Gửi tin nhắn xác nhận thanh toán thành công cho khách. Nếu là top-up: cập nhật số dư tài khoản trên THG Hub. Đơn hàng bị hold (nếu có) được gỡ hold ngay.</div>
+          <div class="step-note success">✅ Mẫu tin nhắn: <em>"THG đã xác nhận nhận được thanh toán [số tiền] từ anh/chị [tên] vào ngày [ngày]. Cảm ơn anh/chị! Đơn hàng tiếp tục được xử lý bình thường."</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Giai đoạn 6 — Đối soát định kỳ</div>
+    <table class="tl-table" style="margin-top:12px">
+      <thead><tr><th>Chu kỳ</th><th>Nội dung</th><th>Người thực hiện</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hàng tuần (Thứ 6 — 16:00)</strong></td><td>Review danh sách công nợ. Flag các khoản quá hạn. Thống kê số invoice pending / paid / overdue.</td><td><span class="dept dept-cskh">CSKH</span> + <span class="dept dept-ke-toan">Kế toán</span></td></tr>
+        <tr><td><strong>Hàng tháng (Ngày 1 — 10:00)</strong></td><td>Reconcile đầy đủ giữa THG Hub và sổ kế toán. Báo cáo công nợ lên Quản lý.</td><td><span class="dept dept-ke-toan">Kế toán</span> → <span class="dept dept-ql">Quản lý</span></td></tr>
+        <tr><td><strong>Khi phát sinh nợ xấu (>45 ngày)</strong></td><td>Escalate lên Quản lý ngay, không chờ tháng.</td><td><span class="dept dept-cskh">CSKH</span> → <span class="dept dept-ql">Quản lý</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚫 Những điều KHÔNG được làm</div>
+    <div class="rules-box" style="margin-top:12px">
+      <div class="rule"><span class="rule-icon">🚫</span><div>Không tiếp tục xử lý đơn mới khi khách đã vượt hạn mức công nợ và chưa có phê duyệt ngoại lệ từ Quản lý.</div></div>
+      <div class="rule"><span class="rule-icon">🚫</span><div>Không tự ý xác nhận "đã nhận tiền" với khách khi chưa có xác nhận từ Kế toán.</div></div>
+      <div class="rule"><span class="rule-icon">🚫</span><div>Không bỏ qua lịch nhắc nợ — dù khách là khách VIP hay quan hệ lâu dài.</div></div>
+      <div class="rule"><span class="rule-icon">🚫</span><div>Không để invoice treo quá 7 ngày mà không có hành động follow-up.</div></div>
+      <div class="rule"><span class="rule-icon">🚫</span><div>Không nhận tiền mặt trực tiếp khi chưa có hướng dẫn từ cấp trên.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-embed-area" style="margin-top:8px"><input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-sop006')" /><div id="yt-sop006"></div></div>
+  </div>
+</section>
+
+<!-- ══════════ SOP-007 ══════════ -->
+<section class="page" id="page-sop007">
+  <div class="sop-header">
+    <div class="sop-code">SOP-007 · Liên phòng ban</div>
+    <div class="sop-title-big">CSKH ↔ Kế toán ↔ Warehouse — Quy trình phối hợp</div>
+    <div class="sop-meta"><div class="sop-meta-item">📋 v1.0</div><div class="sop-meta-item">👤 CSKH + Kế toán + Vận hành</div></div>
+    <div class="sop-badges"><span class="badge badge-dept">CSKH</span><span class="badge badge-dept">Kế toán</span><span class="badge badge-dept">Vận hành</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔄 Luồng phối hợp tổng thể</div>
+    <div class="flow" style="margin-top:16px;justify-content:center;gap:0">
+      <div class="flow-box sm">Sale/CSKH<br><small>Chốt đơn</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box ops">Vận hành<br><small>Xử lý kho</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box cs">CSKH<br><small>Invoice</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box fin">Kế toán<br><small>Xác nhận TT</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box cs">CSKH<br><small>Cập nhật KH</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Chi tiết quy trình phối hợp 3 bên</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Hoàn thành xử lý đơn hàng</div>
+          <div class="step-detail">Đơn delivered/confirmed → Vận hành cập nhật trạng thái cuối → CSKH xác nhận với khách.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span></div>
+          <div class="step-action">Tổng hợp & tính phí cuối</div>
+          <div class="step-detail">CSKH tổng hợp toàn bộ phí từ Vận hành (phí label, kho, xử lý...) + phí dịch vụ THG → Tạo invoice trên THG Hub → Gửi cho khách + báo Kế toán.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-ke-toan">Kế toán</span></div>
+          <div class="step-action">Ghi nhận công nợ & theo dõi</div>
+          <div class="step-detail">Kế toán nhận thông báo từ CSKH → Ghi vào sổ công nợ → Theo dõi lịch thanh toán → Xác nhận khi tiền về.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-cskh">CSKH</span><span class="dept dept-ke-toan">Kế toán</span></div>
+          <div class="step-action">Thực hiện đối soát hàng tuần</div>
+          <div class="step-detail">Thứ 6 hàng tuần: CSKH gửi báo cáo danh sách invoice theo trạng thái (Pending / Paid / Overdue) → Kế toán đối chiếu với sổ sách → Thống nhất số liệu → Báo cáo lên Quản lý nếu có nợ quá hạn.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-dept-row"><span class="dept dept-ke-toan">Kế toán</span><span class="dept dept-van-hanh">Vận hành</span></div>
+          <div class="step-action">Đối soát chi phí kho hàng tháng</div>
+          <div class="step-detail">Cuối tháng: Kế toán đối soát chi phí phát sinh với Vận hành (chi phí kho Mỹ, phí dịch vụ đối tác...) → Xác nhận số liệu → Lập báo cáo tài chính tháng.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Ma trận phân công trách nhiệm</div>
+    <table class="tl-table" style="margin-top:12px">
+      <thead><tr><th>Nhiệm vụ</th><th>CSKH</th><th>Vận hành</th><th>Kế toán</th><th>Quản lý</th></tr></thead>
+      <tbody>
+        <tr><td>Tương tác trực tiếp với KH</td><td style="text-align:center">✅ Chính</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">Khi leo thang</td></tr>
+        <tr><td>Xử lý đơn hàng kho</td><td style="text-align:center">Hỗ trợ</td><td style="text-align:center">✅ Chính</td><td style="text-align:center">—</td><td style="text-align:center">—</td></tr>
+        <tr><td>Tạo invoice</td><td style="text-align:center">✅ Chính</td><td style="text-align:center">Cung cấp số liệu</td><td style="text-align:center">Ghi nhận</td><td style="text-align:center">—</td></tr>
+        <tr><td>Xác nhận thanh toán</td><td style="text-align:center">Nhận bill từ KH</td><td style="text-align:center">—</td><td style="text-align:center">✅ Chính</td><td style="text-align:center">—</td></tr>
+        <tr><td>Nhắc nợ (D+7, D+14)</td><td style="text-align:center">✅ Chính</td><td style="text-align:center">—</td><td style="text-align:center">Theo dõi</td><td style="text-align:center">—</td></tr>
+        <tr><td>Hold đơn / Gỡ hold</td><td style="text-align:center">Thực hiện</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">✅ Phê duyệt</td></tr>
+        <tr><td>Escalate nợ xấu >30 ngày</td><td style="text-align:center">Báo cáo</td><td style="text-align:center">—</td><td style="text-align:center">Xác nhận số liệu</td><td style="text-align:center">✅ Xử lý</td></tr>
+        <tr><td>Đối soát cuối tháng</td><td style="text-align:center">Cung cấp data</td><td style="text-align:center">Cung cấp data</td><td style="text-align:center">✅ Chính</td><td style="text-align:center">Nhận báo cáo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn</div>
+    <div class="yt-embed-area" style="margin-top:8px"><input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-sop007')" /><div id="yt-sop007"></div></div>
+  </div>
+</section>
+
+<!-- ══════════ PANCAKE ══════════ -->
+<section class="page" id="page-pancake">
+  <div class="sop-header">
+    <div class="sop-code">Hệ thống · CRM</div>
+    <div class="sop-title-big">Pancake CRM — Hướng dẫn sử dụng</div>
+    <div class="sop-meta"><div class="sop-meta-item">🔗 pancake.vn/dashboard</div><div class="sop-meta-item">👤 CSKH + Sale Marketing</div></div>
+    <div class="sop-badges"><span class="badge badge-dept">CSKH</span><span class="badge badge-dept">Sale Marketing</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚨 Quy tắc bắt buộc</div>
+    <div class="rules-box" style="margin-top:12px">
+      <div class="rule"><span class="rule-icon">✅</span><div><strong>Toàn bộ reply khách phải thực hiện trên Pancake</strong> — không dùng Zalo/Telegram cá nhân để trả lời khách của công ty.</div></div>
+      <div class="rule"><span class="rule-icon">✅</span><div>Mỗi hội thoại mới phải <strong>phân công nhân viên phụ trách ngay</strong> khi tiếp nhận.</div></div>
+      <div class="rule"><span class="rule-icon">✅</span><div>Phải <strong>gắn đủ 3 tag</strong> cho mỗi khách: (1) Mảng dịch vụ, (2) Tệp khách, (3) Kênh tiếp cận.</div></div>
+      <div class="rule"><span class="rule-icon">✅</span><div>Khi chuyển sang Zalo/Telegram lập nhóm tư vấn → phải <strong>ghi chú đầy đủ</strong> ở mục ghi chú Pancake.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Quy trình làm việc trên Pancake</div>
+    <div style="margin-top:16px" class="steps">
+      <div class="step">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-action">Đăng nhập</div>
+          <div class="step-detail">Truy cập <strong>pancake.vn/dashboard</strong> → Đăng nhập tài khoản chung → Đăng nhập tài khoản cá nhân (Facebook cho Meta; tài khoản do Quản lý tạo cho Telegram/Zalo).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-action">Tiếp nhận & phân công hội thoại</div>
+          <div class="step-detail">Inbox mới xuất hiện ở Cột 1 → Mở hội thoại → Tìm mục "Phân công nhân viên" ở Cột 3 → Chọn tên mình.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-action">Gắn Tag phân loại (3 tag bắt buộc)</div>
+          <div class="step-detail">Tag 1 — Mảng dịch vụ: POD / Dropship / Express / Warehouse<br>Tag 2 — Tệp khách: Tiềm năng / VIP / Mới / Cũ<br>Tag 3 — Kênh: Facebook / TikTok / Zalo / Telegram / Referral / CEO...</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-action">Tư vấn & ghi chú</div>
+          <div class="step-detail">Tư vấn tại Cột 2 (cửa sổ hội thoại). Ghi chú đầy đủ vào Cột 3 theo mẫu:<br><em>"1- Nhu cầu dịch vụ / 2- Loại hàng hoá / 3- Nhu cầu chi tiết"</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📺 Video hướng dẫn Pancake</div>
+    <div class="yt-embed-area" style="margin-top:8px"><input type="text" placeholder="Dán link YouTube..." onchange="embedYT(this,'yt-pancake')" /><div id="yt-pancake"></div></div>
+  </div>
+</section>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+function nav(el, pageId) {
+  // update active nav item
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  // show correct page
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if (page) page.classList.add('active');
+
+  // update breadcrumb
+  const titles = {
+    home: 'Dashboard',
+    sop001: 'SOP-001 · Quản lý Leads',
+    sop002: 'SOP-002 · Bàn giao Khách',
+    sop003: 'SOP-003 · POD / Dropship',
+    sop004: 'SOP-004 · Express',
+    sop005: 'SOP-005 · Warehouse',
+    sop006: 'SOP-006 · Thu Tiền & Công Nợ',
+    sop007: 'SOP-007 · CSKH ↔ Kế toán ↔ WH',
+    pancake: 'Pancake CRM',
+  };
+  document.getElementById('breadcrumb').innerHTML =
+    'THG Hub <span>/ ' + (titles[pageId] || pageId) + '</span>';
+
+  // scroll to top
+  document.querySelector('.content').scrollTop = 0;
+}
+
+function embedYT(input, containerId) {
+  const url = input.value.trim();
+  if (!url) return;
+  let videoId = '';
+  const m = url.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
+  if (m) videoId = m[1];
+  if (!videoId) { alert('Link YouTube không hợp lệ'); return; }
+  const container = document.getElementById(containerId);
+  container.innerHTML = '<div style="position:relative;aspect-ratio:16/9"><iframe style="position:absolute;inset:0;width:100%;height:100%;border-radius:10px" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe></div>';
+  input.style.display = 'none';
+}
+
+function searchSOPs(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.sop-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+}
+
+// Make dashboard SOP cards clickable
+document.querySelectorAll('.sop-card').forEach(card => {
+  card.style.cursor = 'pointer';
+});
+</script>
+</body>
+</html>
